@@ -1,20 +1,29 @@
+/* --- Google Fonts Import --- */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@700&display=swap');
+
 /* --- General & Home Page Styles --- */
 body {
-    background-color: #fdf5f6;
-    font-family: sans-serif;
+    /* New: Subtle gradient background */
+    background: linear-gradient(180deg, #fdf5f6 0%, #f9eef1 100%);
+    /* New: A cleaner, more readable font for paragraphs */
+    font-family: 'Lato', sans-serif;
     margin: 0;
+    color: #593c47; /* Set a base text color */
 }
 
 body.timeline-page {
-    background-color: #fdf5f6;
     min-width: 950px;
-/* Styles specific to the timeline page can go here if needed */
+}
+
+h1, h2, h3 {
+    /* New: An elegant, classic font for all headings */
+    font-family: 'Playfair Display', serif;
+    color: #8c5d6e;
+    text-align: center;
 }
 
 h1 {
-    color: #8c5d6e;
-    font-size: 3rem;
-    text-align: center;
+    font-size: 3.5rem;
     margin: 2rem 0;
 }
 
@@ -23,6 +32,7 @@ nav {
     text-align: center;
     padding: 1rem;
     background-color: #fcebeb;
+    border-bottom: 1px solid #f8e1e5;
 }
 
 nav a {
@@ -33,17 +43,46 @@ nav a {
     font-weight: bold;
 }
 
-/* --- Timer & Milestone Styles (Home Page) --- */
-.timer-container, .reasons-container, .playlist-container, .milestone-container {
+/* --- General Container Styles --- */
+.timer-container, .playlist-container, .milestone-container, .reasons-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem; /* Increased spacing between sections */
+    padding: 0 1rem; /* Add padding for smaller screens */
 }
 
+/* --- Milestone Section (Now Larger) --- */
+.milestone-container {
+    background-color: #fbf6f7;
+    border-radius: 10px;
+    padding: 2.5rem 2rem;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+    width: 600px; 
+    box-sizing: border-box;
+    border-top: 3px solid #e7d1d6;
+    border-bottom: 3px solid #e7d1d6;
+    margin: 3rem auto;
+}
+
+.milestone-container h2 {
+    font-size: 1.8rem; /* Larger heading */
+    margin: 0 0 1rem 0;
+}
+
+.milestone-container p {
+    font-size: 2rem; /* Larger countdown text */
+    font-family: 'Playfair Display', serif;
+    margin: 0;
+}
+
+
+/* --- Timer Section --- */
 .timer-boxes {
     display: flex;
     gap: 1rem;
+    flex-wrap: wrap; /* Allows boxes to wrap on smaller screens */
+    justify-content: center;
 }
 
 .time-box {
@@ -52,11 +91,12 @@ nav a {
     padding: 1.5rem;
     text-align: center;
     width: 100px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.05); /* Softer shadow */
     position: relative;
 }
 
 .number {
+    font-family: 'Playfair Display', serif;
     font-size: 3.5rem;
     font-weight: bold;
     color: #593c47;
@@ -77,12 +117,63 @@ nav a {
     cursor: pointer;
 }
 
-/* --- Animations (Hearts) --- */
+
+/* --- Reasons Why Section --- */
+.reasons-container {
+    background-color: #fcebeb;
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.05);
+    max-width: 500px;
+    box-sizing: border-box;
+    margin-bottom: 3rem;
+    /* Add these two lines to center the container */
+    margin-left: auto;
+    margin-right: auto;
+}
+.reasons-container h2 {
+    margin-top: 0;
+}
+.reasons-container p {
+    font-size: 1.2rem;
+    min-height: 50px;
+    transition: opacity 0.3s ease-in-out;
+}
+.faded-out {
+    opacity: 0;
+}
+#new-reason-button {
+    background-color: #8c5d6e;
+    color: white;
+    border: none;
+    border-radius: 8px; /* Slightly more rounded */
+    padding: 12px 24px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    font-size: 1rem;
+    font-weight: bold;
+    font-family: 'Lato', sans-serif;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+#new-reason-button:hover {
+    background-color: #593c47;
+    transform: translateY(-2px); /* Add a 'lift' effect */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+
+/* --- Playlist Section --- */
+.playlist-container {
+    width: 100%;
+    max-width: 650px;
+}
+
+
+/* --- Animations & Floating Hearts (No changes here) --- */
 @keyframes beat {
     0%, 100% { transform: scale(1); }
     50% { transform: scale(1.2); }
 }
-
 #hearts-container {
     position: fixed;
     bottom: 0; left: 0;
@@ -91,18 +182,53 @@ nav a {
     overflow: hidden;
     z-index: 9999;
 }
+.floating-heart {
+    position: absolute;
+    bottom: -10vh;
+    opacity: 0;
+    animation: floatUp 10s ease-in;
+    --heart-size: 20px;
+    width: var(--heart-size);
+    height: var(--heart-size);
+    background-color: #ff79ac;
+    transform: rotate(-45deg);
+}
+.floating-heart::before, .floating-heart::after {
+    content: '';
+    position: absolute;
+    width: var(--heart-size);
+    height: var(--heart-size);
+    background-color: #ff79ac;
+    border-radius: 50%;
+}
+.floating-heart::before {
+    top: calc(var(--heart-size) / -2);
+    left: 0;
+}
+.floating-heart::after {
+    top: 0;
+    left: calc(var(--heart-size) / 2);
+}
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) rotate(-45deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-120vh) rotate(-45deg);
+        opacity: 0;
+    }
+}
+
 
 /* --- FINAL TIMELINE STYLES --- */
 
 .timeline {
     position: relative;
-    width: 100%;
-    width: 900px; /* Adjust this to make bubbles wider or narrower */
+    width: 900px;
     margin: 2rem auto;
     padding: 1rem 0;
 }
-
-/* The central line */
 .timeline::before {
     content: '';
     position: absolute;
@@ -113,28 +239,20 @@ nav a {
     height: 100%;
     background-color: #fcebeb;
 }
-
-/* The invisible positioning container */
 .timeline-event {
     position: relative;
     width: 50%;
     margin-bottom: 2rem;
     box-sizing: border-box;
 }
-
-/* THE KEY FIX: Position left-side events and ADD SPACE on the right */
 .timeline-event:nth-child(odd) {
     left: 0;
     padding-right: 2rem; 
 }
-
-/* THE KEY FIX: Position right-side events and ADD SPACE on the left */
 .timeline-event:nth-child(even) {
     left: 50%;
     padding-left: 2rem;
 }
-
-/* The dot on the timeline */
 .timeline-event::after {
     content: '';
     position: absolute;
@@ -146,30 +264,25 @@ nav a {
     border-radius: 50%;
     z-index: 1;
 }
-
 .timeline-event:nth-child(odd)::after {
     right: -8px;
 }
-
 .timeline-event:nth-child(even)::after {
     left: -8px;
 }
-
-/* The visible content bubble */
 .timeline-content {
     padding: 1.5rem;
     background-color: #fcebeb;
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.05); /* Softer shadow */
 }
-
 .timeline-date {
+    font-family: 'Playfair Display', serif;
     font-weight: bold;
     color: #8c5d6e;
     font-size: 1.1rem;
     margin-bottom: 0.5rem;
 }
-
 .timeline-content p {
     margin: 0;
     font-size: 1rem;

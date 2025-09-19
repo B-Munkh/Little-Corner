@@ -82,8 +82,6 @@ window.addEventListener('DOMContentLoaded', () => {
     // Call your new function just ONCE when the page loads
     displayNextMilestone();
 
-    // --- NEW Floating Hearts Click-Trigger Code ---
-
     // 1. Get references to the heart container and the clickable heart
     const container = document.getElementById('hearts-container');
     const triggerHeart = document.getElementById('trigger-heart');
@@ -117,4 +115,39 @@ window.addEventListener('DOMContentLoaded', () => {
     
     // 3. Listen for a 'click' on the beating heart and run the animation function
     triggerHeart.addEventListener('click', triggerHeartsAnimation);
+
+    const reasons = [
+        "You always show that you care about me",
+        "You never make me feel like I'm being weird",
+        "We can laugh about anything and everything together",
+        "Your smile lights up the entire room",
+        "Your eyes are filled with warmth and love when you look at me",
+        "You make me feel right at home, no matter where we are",
+        "You're the one person who I look forward to seeing and talking to everyday",
+    ]
+    const reasonText = document.getElementById("reason-text");
+    const newReasonButton = document.getElementById("new-reason-button");
+    let lastReasonIndex = -1; // Keep track of the last reason shown
+
+    newReasonButton.addEventListener('click', () => {
+        // 1. Add the class to start the fade-out
+        reasonText.classList.add('faded-out');
+
+        // 2. Wait for the fade-out to finish
+        setTimeout(() => {
+            // 3. Find a new reason that isn't the same as the last one
+            let newIndex;
+            do {
+                newIndex = Math.floor(Math.random() * reasons.length);
+            } while (reasons.length > 1 && newIndex === lastReasonIndex);
+            
+            lastReasonIndex = newIndex; // Update the last reason index
+            
+            // 4. Update the text while it's invisible
+            reasonText.textContent = reasons[newIndex];
+            
+            // 5. Remove the class to start the fade-in
+            reasonText.classList.remove('faded-out');
+        }, 300); // This time should match your CSS transition duration
+    });
 });
