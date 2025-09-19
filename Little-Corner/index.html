@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Our Little Corner</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="script.js" defer></script>
+    </head>
+    <body>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="timeline.html">Our Timeline</a>
+        </nav>
+
+        <h1>Time Together</h1>
+
+        <div class="timer-container">
+            <div class="timer-boxes">
+                <div class="time-box">
+                    <div class="number" id="years">00</div>
+                    <div class="label">Years</div>
+                </div>
+                <div class="time-box">
+                    <div class="number" id="months">00</div>
+                    <div class="label">Months</div>
+                </div>
+                <div class="time-box">
+                    <div class="number" id="days">00</div>
+                    <div class="label">Days</div>
+                </div>
+                <div class="time-box">
+                    <div class="number" id="hours">00</div>
+                    <div class="label">Hours</div>
+                </div>
+                <div class="time-box">
+                    <div class="number" id="minutes">00</div>
+                    <div class="label">Minutes</div>
+                </div>
+                <div class="time-box">
+                    <div class="number" id="seconds">00</div>
+                    <div class="label">Seconds</div>
+                    <div class="heart" id="trigger-heart">❤️</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="milestone-container">
+            <h2>Next Milestone</h2>
+            <p id="milestone-text">Calculating...</p>
+        </div>
+
+        <div class="reasons-container">
+            <h2>A Few Reasons Why...</h2>
+            <p id="reason-text">Click the button to see a reason!</p>
+            <button id="new-reason-button">New Reason</button>
+        </div>
+
+        <div class="playlist-container">
+            <h2>Our Playlist</h2>
+            <iframe style="border-radius:12px" src="YOUR_SPOTIFY_EMBED_LINK_HERE" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
+
+        <div id="hearts-container"></div>
+
+    </body>
+</html>

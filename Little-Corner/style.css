@@ -1,0 +1,177 @@
+/* --- General & Home Page Styles --- */
+body {
+    background-color: #fdf5f6;
+    font-family: sans-serif;
+    margin: 0;
+}
+
+body.timeline-page {
+    background-color: #fdf5f6;
+    min-width: 950px;
+/* Styles specific to the timeline page can go here if needed */
+}
+
+h1 {
+    color: #8c5d6e;
+    font-size: 3rem;
+    text-align: center;
+    margin: 2rem 0;
+}
+
+nav {
+    width: 100%;
+    text-align: center;
+    padding: 1rem;
+    background-color: #fcebeb;
+}
+
+nav a {
+    color: #8c5d6e;
+    margin: 0 1rem;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* --- Timer & Milestone Styles (Home Page) --- */
+.timer-container, .reasons-container, .playlist-container, .milestone-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.timer-boxes {
+    display: flex;
+    gap: 1rem;
+}
+
+.time-box {
+    background-color: #fcebeb;
+    border-radius: 10px;
+    padding: 1.5rem;
+    text-align: center;
+    width: 100px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    position: relative;
+}
+
+.number {
+    font-size: 3.5rem;
+    font-weight: bold;
+    color: #593c47;
+}
+
+.label {
+    font-size: 1rem;
+    color: #8c5d6e;
+    margin-top: 0.5rem;
+}
+
+.heart {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    font-size: 1.5rem;
+    animation: beat 1.5s infinite;
+    cursor: pointer;
+}
+
+/* --- Animations (Hearts) --- */
+@keyframes beat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+#hearts-container {
+    position: fixed;
+    bottom: 0; left: 0;
+    width: 100%; height: 100vh;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 9999;
+}
+
+/* --- FINAL TIMELINE STYLES --- */
+
+.timeline {
+    position: relative;
+    width: 100%;
+    width: 900px; /* Adjust this to make bubbles wider or narrower */
+    margin: 2rem auto;
+    padding: 1rem 0;
+}
+
+/* The central line */
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 100%;
+    background-color: #fcebeb;
+}
+
+/* The invisible positioning container */
+.timeline-event {
+    position: relative;
+    width: 50%;
+    margin-bottom: 2rem;
+    box-sizing: border-box;
+}
+
+/* THE KEY FIX: Position left-side events and ADD SPACE on the right */
+.timeline-event:nth-child(odd) {
+    left: 0;
+    padding-right: 2rem; 
+}
+
+/* THE KEY FIX: Position right-side events and ADD SPACE on the left */
+.timeline-event:nth-child(even) {
+    left: 50%;
+    padding-left: 2rem;
+}
+
+/* The dot on the timeline */
+.timeline-event::after {
+    content: '';
+    position: absolute;
+    top: 15px;
+    width: 16px;
+    height: 16px;
+    background-color: white;
+    border: 4px solid #8c5d6e;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.timeline-event:nth-child(odd)::after {
+    right: -8px;
+}
+
+.timeline-event:nth-child(even)::after {
+    left: -8px;
+}
+
+/* The visible content bubble */
+.timeline-content {
+    padding: 1.5rem;
+    background-color: #fcebeb;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.timeline-date {
+    font-weight: bold;
+    color: #8c5d6e;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.timeline-content p {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.5;
+}
