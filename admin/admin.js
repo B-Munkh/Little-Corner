@@ -1,11 +1,12 @@
-// Add your Firebase project configuration here
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT_ID.appspot.com",
-    messagingSenderId: "YOUR_SENDER_ID",
-    appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyA8DV-mC-s-Vw9L3GqrK-xicVzvVyhr9tU",
+  authDomain: "little-corner-3c73d.firebaseapp.com",
+  projectId: "little-corner-3c73d",
+  storageBucket: "little-corner-3c73d.firebasestorage.app",
+  messagingSenderId: "763428297149",
+  appId: "1:763428297149:web:08e66d194dd8cc31281ad4",
+  measurementId: "G-QS8NDFH6L5"
 };
 
 // Initialize Firebase
