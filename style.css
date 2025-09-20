@@ -99,7 +99,8 @@ body {
 }
 
 body.timeline-page {
-    min-width: 950px;
+    /* Set this to auto so it doesn't cause overflow on mobile */
+    min-width: auto;
 }
 
 h1, h2, h3 {
@@ -437,6 +438,10 @@ nav a {
     .playlist-container {
         width: 90%;
         margin: 0 auto;
+    }
+    .playlist-container iframe {
+        width: 100%;
+        height: auto;
     }
 
     /* Timeline Section */
