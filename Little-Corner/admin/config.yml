@@ -1,0 +1,20 @@
+# Step 1: Configure the backend (your GitHub repo)
+backend:
+  name: git-gateway
+
+# Step 2: Configure where media (images) will be stored
+media_folder: "images/uploads" # The folder where images will be saved in your repo
+public_folder: "/images/uploads" # The path the website will use to access the images
+
+# Step 3: Define your editable content types (Collections)
+collections:
+  - name: "timeline" # The name for the collection of timeline events
+    label: "Timeline" # How it will appear in the CMS interface
+    folder: "_timeline" # The folder where new memories will be saved as files
+    create: true # Allow your girlfriend to create new timeline events
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # How to automatically name new files
+    fields: # The form fields she will see when editing
+      - { label: "Event Date", name: "date", widget: "datetime" }
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Memory Text", name: "body", widget: "markdown" }
+      - { label: "Photo", name: "image", widget: "image", optional: true }
