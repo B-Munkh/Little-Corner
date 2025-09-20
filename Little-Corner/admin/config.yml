@@ -11,9 +11,9 @@ collections:
   - name: "timeline" # The name for the collection of timeline events
     label: "Timeline" # How it will appear in the CMS interface
     folder: "_timeline" # The folder where new memories will be saved as files
-    create: true # Allow your girlfriend to create new timeline events
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # How to automatically name new files
-    fields: # The form fields she will see when editing
+    create: true 
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}" 
+    fields: 
       - { label: "Event Date", name: "date", widget: "datetime", optional: true, time_format: false }
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Memory Text", name: "body", widget: "markdown" }
