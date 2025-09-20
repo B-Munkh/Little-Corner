@@ -1,81 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Our Timeline</title>
-        <link rel="stylesheet" href="style.css">
-        <script src="script.js" defer></script>
+    <meta charset="UTF-8">
+    <title>Our Timeline</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/front-matter@4.0.2/dist/front-matter.js"></script>
+    <script src="script.js" defer></script>
+</head>
     </head>
     <body class="timeline-page"> 
         <nav>
             <a href="index.html">Home</a>
+            <a href="timeline.html">Our Timeline</a>
+            <a href="/admin/" target="_blank">Edit Memories</a>
         </nav>
 
         <h1>Our Story So Far</h1>
 
-        <div class="timeline">
-            <div class="timeline-event">
-                <div class="timeline-content">
-                    <div class="timeline-date">February 8, 2025</div>
-                    <p> 
-                        We first matched on a dating app, where I used a pickup that made you immediately fall 
-                        for me. Which was "Are you my appendix, because I think I need to take you out".
-                    </p>
-                </div>
-            </div>
-            <div class="timeline-event">
-                <div class="timeline-content">
-                    <div class="timeline-date">February 10, 2025</div>
-                    <p>
-                        Our very first date, we met in galleria and I showed up dressed lackluster while you were
-                        absolutely stunning and gorgeous. It started off shaky and I was really nervious, but I 
-                        really wanted it to work and you spotted me googling questions to ask you. After that we went
-                        and played some billiards, where we both sucked. The date ended with us holding hands while snow 
-                        was gently falling, and I didn't want the night to end.
-                    </p>
-                </div>
-            </div>
-            <div class="timeline-event">
-                <div class="timeline-content">
-                    <div class="timeline-date">February 14, 2025</div>
-                    <p>
-                        Disaster struck, the thought of buying flowers on valentine's of all days had completely slipped my mind.
-                        You were dressed like a princess and I was a complete mess. A horrible movie, no flowers, no valentine's.
-                        At this point, I thought I had completely my chance with you, I had to think of a way to make it up to you.
-                    </p>
-                </div>
-            </div>
-            <div class="timeline-event">
-                <div class="timeline-content">
-                    <div class="timeline-date">February 15, 2025</div>
-                    <p>
-                        What's the point of getting you flowers at this point? Which meant I had to think of something a bit more 
-                        creative. I spent the entire day going around the city, collecting materials to make a paper flower bouquet.
-                        While it can't beat the real thing, I thought it'd be a good way that I really cared about you. 
-                    </p>
-                </div>
-            </div>
-            <div class="timeline-event">
-                <div class="timeline-content">
-                    <div class="timeline-date">February 19, 2025</div>
-                    <p>
-                        The day you came over to my place and it was the first time we spent the entire day together at my place.
-                        We watched "The Office" together, while cuddling and 
-                    </p>
-                </div>
-            </div>
-            <div class="timeline-event">
-                <div class="timeline-content">
-                    <div class="timeline-date">March 8, 2025</div>
-                    <p>
-                        The day we met each other after a couple of days of not being able to see each other because of "Tsagaan Sar".
-                        It was like a trial run of the long distance relationship we were going to have. Spending the entire day together
-                        felt amazing and it just felt right to be by your side all the time.
-                    </p>
-                </div>
-            </div>
-        </div>
+        <div class="timeline" id="timeline-container"></div>
     </body>
 </html>
