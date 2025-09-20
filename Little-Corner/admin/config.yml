@@ -1,6 +1,7 @@
 # Step 1: Configure the backend (your GitHub repo)
 backend:
   name: git-gateway
+  branch: main
 
 # Step 2: Configure where media (images) will be stored
 media_folder: "images/uploads" # The folder where images will be saved in your repo
