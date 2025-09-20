@@ -113,8 +113,7 @@ window.addEventListener('DOMContentLoaded', () => {
         
         async function buildTimeline() {
             const timelineContainer = document.getElementById('timeline-container');
-            // 🚨 IMPORTANT: Replace this with your GitHub username and repository name
-            const repoURL = 'https://api.github.com/repos/YOUR_USERNAME/YOUR_REPONAME/contents/_timeline';
+            const repoURL = 'https://api.github.com/repos/B-Munkh/Littile-Corner/contents/_timeline';
 
             try {
                 // 1. Fetch the list of memory files from GitHub
