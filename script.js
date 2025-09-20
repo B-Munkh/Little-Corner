@@ -111,6 +111,21 @@ window.addEventListener('DOMContentLoaded', () => {
     // Checks if we are on the timeline page
     if (document.getElementById('timeline-container')) {
         
+        function parseFrontMatter(content) {
+        const match = /^---\n([\s\S]*?)\n---/.exec(content);
+        if (!match) return { attributes: {}, body: content };
+
+        const rawAttrs = match[1];
+        const body = content.slice(match[0].length);
+
+        const attributes = {};
+        rawAttrs.split("\n").forEach(line => {
+            const [key, ...rest] = line.split(":");
+            if (key) attributes[key.trim()] = rest.join(":").trim();
+        });
+
+        return { attributes, body };
+        }
         async function buildTimeline() {
             const timelineContainer = document.getElementById('timeline-container');
             const repoURL = 'https://api.github.com/repos/B-Munkh/Little-Corner/contents/_timeline';
