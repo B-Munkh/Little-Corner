@@ -1,6 +1,72 @@
 /* --- Google Fonts Import --- */
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@700&display=swap');
 
+/* --- Admin Page Styles --- */
+.admin-container {
+    background-color: #fcebeb;
+    border-radius: 10px;
+    padding: 2.5rem;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.05);
+    max-width: 600px;
+    margin: 3rem auto;
+    text-align: center;
+}
+
+.admin-container h2 {
+    font-size: 2rem;
+    color: #8c5d6e;
+    font-family: 'Playfair Display', serif;
+}
+
+#admin-form-container, #memory-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+#admin-form-container input, #memory-form input, #memory-form textarea, #memory-form select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #e7d1d6;
+    font-family: 'Lato', sans-serif;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+#admin-form-container button, #memory-form button {
+    background-color: #8c5d6e;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    font-size: 1rem;
+    font-weight: bold;
+    font-family: 'Lato', sans-serif;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#admin-form-container button:hover, #memory-form button:hover {
+    background-color: #593c47;
+    transform: translateY(-2px);
+}
+
+#memory-form textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+#memory-form hr {
+    width: 100%;
+    border: 0;
+    height: 1px;
+    background-color: #e7d1d6;
+    margin: 2rem 0;
+}
+
 /* --- General & Home Page Styles --- */
 body {
     /* New: Subtle gradient background */
