@@ -35,30 +35,37 @@ window.addEventListener('DOMContentLoaded', () => {
         }
         setInterval(updateTimer, 1000);
         updateTimer();
-
+        
         // --- Milestone Code ---
         function displayNextMilestone() {
             const now = new Date();
-            const milestones = [
-                { date: "2026-02-19T00:00:00", name: "1 Year Anniversary!" },
-                { date: "2027-11-16T00:00:00", name: "1000 Days Together!" },
-            ];
-            let soonestMilestoneDate = null;
-            let soonestMilestoneName = "";
-            for (const milestone of milestones) {
-                const milestoneDate = new Date(milestone.date);
-                if (milestoneDate > now && (!soonestMilestoneDate || milestoneDate < soonestMilestoneDate)) {
-                    soonestMilestoneDate = milestoneDate;
-                    soonestMilestoneName = milestone.name;
+            const messageElement = document.getElementById("milestone-text");
+
+            db.collection("milestones").orderBy("date", "asc").get().then((querySnapshot) => {
+                let soonestMilestoneDate = null;
+                let soonestMilestoneName = "";
+                
+                querySnapshot.forEach((doc) => {
+                    const milestone = doc.data();
+                    const milestoneDate = milestone.date.toDate();
+                    
+                    if (milestoneDate > now && (!soonestMilestoneDate || milestoneDate < soonestMilestoneDate)) {
+                        soonestMilestoneDate = milestoneDate;
+                        soonestMilestoneName = milestone.name;
+                    }
+                });
+
+                if (soonestMilestoneDate) {
+                    const distance = soonestMilestoneDate - now;
+                    const days = Math.ceil(distance / (1000 * 60 * 60 * 24));
+                    messageElement.textContent = `${days} days until ${soonestMilestoneName}`;
+                } else {
+                    messageElement.textContent = "No upcoming milestones!";
                 }
-            }
-            if (soonestMilestoneDate) {
-                const distance = soonestMilestoneDate - now;
-                const days = Math.ceil(distance / (1000 * 60 * 60 * 24));
-                document.getElementById("milestone-text").textContent = `${days} days until ${soonestMilestoneName}`;
-            } else {
-                document.getElementById("milestone-text").textContent = "No upcoming milestones!";
-            }
+            }).catch((error) => {
+                console.error("Error fetching milestones:", error);
+                messageElement.textContent = "Could not load milestones.";
+            });
         }
         displayNextMilestone();
 

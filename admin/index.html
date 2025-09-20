@@ -34,6 +34,22 @@
             <button type="submit" id="save-memory">Save Memory</button>
         </form>
         <hr>
+        <h2>Manage Milestones</h2>
+        <form id="milestone-form">
+            <label for="milestone-name-input">Milestone Name:</label>
+            <input type="text" id="milestone-name-input" required>
+            <br>
+            <label for="milestone-date-input">Milestone Date:</label>
+            <input type="date" id="milestone-date-input" required>
+            <br>
+            <button type="submit" id="save-milestone-button">Save Milestone</button>
+        </form>
+        <div id="milestone-list">
+            <h3>Existing Milestones</h3>
+            <select id="existing-milestones"></select>
+            <button id="edit-milestone-button">Edit</button>
+            <button id="delete-milestone-button">Delete</button>
+        </div>
         <h2>Update or Delete a Memory</h2>
         <select id="memory-select"></select>
         <button id="edit-button">Edit Selected</button>

@@ -142,3 +142,84 @@ deleteButton.addEventListener('click', () => {
         });
     }
 });
+
+//Handling milestone form
+const milestoneForm = document.getElementById('milestone-form');
+const milestoneNameInput = document.getElementById('milestone-name-input');
+const milestoneDateInput = document.getElementById('milestone-date-input');
+const existingMilestonesSelect = document.getElementById('existing-milestones');
+const editMilestoneButton = document.getElementById('edit-milestone-button');
+const deleteMilestoneButton = document.getElementById('delete-milestone-button');
+let editingMilestoneId = null;
+
+// Function to populate the dropdown of existing milestones
+function populateMilestoneDropdown() {
+    db.collection("milestones").orderBy("date", "asc").get().then((querySnapshot) => {
+        existingMilestonesSelect.innerHTML = '';
+        querySnapshot.forEach((doc) => {
+            const milestone = doc.data();
+            const option = document.createElement('option');
+            option.value = doc.id;
+            option.textContent = `${milestone.name} - ${milestone.date.toDate().toLocaleDateString()}`;
+            existingMilestonesSelect.appendChild(option);
+        });
+    });
+}
+
+// Handle milestone form submission
+milestoneForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const name = milestoneNameInput.value;
+    const date = new Date(milestoneDateInput.value);
+
+    if (editingMilestoneId) {
+        // Update existing milestone
+        db.collection("milestones").doc(editingMilestoneId).update({ name, date })
+            .then(() => {
+                alert("Milestone updated successfully!");
+                milestoneForm.reset();
+                editingMilestoneId = null;
+                populateMilestoneDropdown();
+            });
+    } else {
+        // Add new milestone
+        db.collection("milestones").add({ name, date })
+            .then(() => {
+                alert("Milestone added successfully!");
+                milestoneForm.reset();
+                populateMilestoneDropdown();
+            });
+    }
+});
+
+// Handle editing an existing milestone
+editMilestoneButton.addEventListener('click', () => {
+    const milestoneId = existingMilestonesSelect.value;
+    db.collection("milestones").doc(milestoneId).get().then((doc) => {
+        if (doc.exists) {
+            const milestone = doc.data();
+            milestoneNameInput.value = milestone.name;
+            milestoneDateInput.value = milestone.date.toDate().toISOString().split('T')[0];
+            editingMilestoneId = doc.id;
+        }
+    });
+});
+
+// Handle deleting a milestone
+deleteMilestoneButton.addEventListener('click', () => {
+    const milestoneId = existingMilestonesSelect.value;
+    if (confirm("Are you sure you want to delete this milestone?")) {
+        db.collection("milestones").doc(milestoneId).delete().then(() => {
+            alert("Milestone deleted successfully!");
+            populateMilestoneDropdown();
+        });
+    }
+});
+
+// Call this on login
+auth.onAuthStateChanged(user => {
+    if (user) {
+        // ... (previous code) ...
+        populateMilestoneDropdown(); // Also populate milestones on login
+    }
+});
