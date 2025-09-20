@@ -96,8 +96,6 @@ body {
     font-family: 'Lato', sans-serif;
     margin: 0;
     color: #593c47;
-    /* Remove this line to prevent horizontal scrolling */
-    min-width: auto;
 }
 
 body.timeline-page {
@@ -443,7 +441,7 @@ nav a {
     }
     .playlist-container iframe {
         width: 100%;
-        height: auto;
+        height: 352px;
     }
 
     /* Timeline Section */
