@@ -1,6 +1,105 @@
 /* --- Google Fonts Import --- */
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@700&display=swap');
 
+/* --- Mobile Styles (max-width: 768px) --- */
+@media screen and (max-width: 768px) {
+    /* General Styles */
+    body {
+        font-size: 14px;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    nav a {
+        font-size: 1rem;
+        margin: 0 0.5rem;
+    }
+
+    /* Timer Section */
+    .timer-container {
+        padding: 0 1rem;
+    }
+    .timer-boxes {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    .time-box {
+        width: 100%;
+        max-width: 250px;
+        margin: 0 auto;
+    }
+    .number {
+        font-size: 3rem;
+    }
+
+    /* Milestone & Reasons Containers */
+    .milestone-container,
+    .reasons-container {
+        width: 90%;
+        margin: 2rem auto;
+        padding: 1.5rem;
+    }
+    .milestone-container p {
+        font-size: 1.5rem;
+    }
+    #new-reason-button {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* Timeline Section */
+    .timeline {
+        width: 90%;
+        margin: 2rem auto;
+    }
+    .timeline::before {
+        left: 20px;
+    }
+    .timeline-event {
+        width: 100%;
+        left: 0;
+        padding-left: 2rem;
+        padding-right: 0;
+    }
+    .timeline-event:nth-child(even) {
+        left: 0;
+        padding-left: 2rem;
+    }
+    .timeline-event::after {
+        left: 12px;
+        top: 0.5rem;
+        transform: none;
+    }
+    .timeline-event:nth-child(even)::after {
+        left: 12px;
+    }
+    .timeline-content {
+        padding: 1rem;
+    }
+    
+    /* Admin Section */
+    .admin-container {
+        width: 90%;
+        padding: 1rem;
+    }
+    .admin-section {
+        width: 100%;
+        padding: 1rem;
+    }
+    .button-group {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    .button-group button {
+        width: 100%;
+    }
+    #memory-select {
+        width: 100%;
+    }
+}
+
 /* --- Admin Page Styles --- */
 .admin-container {
     background-color: #fcebeb;
@@ -167,11 +266,20 @@ nav a {
 
 
 /* --- Timer Section --- */
+.timer-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
 .timer-boxes {
     display: flex;
+    /* Removed flex-wrap: wrap to prevent boxes from stacking */
     gap: 1rem;
-    flex-wrap: wrap; /* Allows boxes to wrap on smaller screens */
     justify-content: center;
+    /* Set a fixed width to keep the layout on a single line */
+    width: 650px; 
 }
 
 .time-box {
