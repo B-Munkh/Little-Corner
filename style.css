@@ -1,6 +1,386 @@
 /* --- Google Fonts Import --- */
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@700&display=swap');
 
+/* --- Admin Page Styles --- */
+.admin-container {
+    background-color: #fcebeb;
+    border-radius: 10px;
+    padding: 2.5rem;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.05);
+    max-width: 800px; /* Increased max-width for better spacing */
+    margin: 3rem auto;
+    text-align: center;
+}
+
+.admin-section {
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    background-color: #fcf8f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.admin-section h2 {
+    font-size: 1.5rem;
+    margin-top: 0;
+}
+
+#admin-form-container, #memory-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+#admin-form-container input, 
+#memory-form input, 
+#memory-form textarea, 
+#memory-form select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #e7d1d6;
+    font-family: 'Lato', sans-serif;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+#admin-form-container button, 
+#memory-form button {
+    background-color: #8c5d6e;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    font-size: 1rem;
+    font-weight: bold;
+    font-family: 'Lato', sans-serif;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#admin-form-container button:hover, 
+#memory-form button:hover {
+    background-color: #593c47;
+    transform: translateY(-2px);
+}
+
+#memory-form textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+#memory-form hr {
+    width: 100%;
+    border: 0;
+    height: 1px;
+    background-color: #e7d1d6;
+    margin: 2rem 0;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    width: 100%;
+}
+
+/* --- General & Home Page Styles --- */
+body {
+    background: linear-gradient(180deg, #fdf5f6 0%, #f9eef1 100%);
+    font-family: 'Lato', sans-serif;
+    margin: 0;
+    color: #593c47;
+}
+
+body.timeline-page {
+    min-width: 950px;
+}
+
+h1, h2, h3 {
+    font-family: 'Playfair Display', serif;
+    color: #8c5d6e;
+    text-align: center;
+}
+
+h1 {
+    font-size: 3.5rem;
+    margin: 2rem 0;
+}
+
+nav {
+    width: 100%;
+    text-align: center;
+    padding: 1rem;
+    background-color: #fcebeb;
+    border-bottom: 1px solid #f8e1e5;
+}
+
+nav a {
+    color: #8c5d6e;
+    margin: 0 1rem;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* --- General Container Styles --- */
+.timer-container, .playlist-container, .milestone-container, .reasons-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 3rem;
+    padding: 0 1rem;
+}
+
+/* --- Milestone Section --- */
+.milestone-container {
+    background-color: #fbf6f7;
+    border-radius: 10px;
+    padding: 2.5rem 2rem;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+    width: 600px; 
+    box-sizing: border-box;
+    border-top: 3px solid #e7d1d6;
+    border-bottom: 3px solid #e7d1d6;
+    margin: 3rem auto;
+}
+
+.milestone-container h2 {
+    font-size: 1.8rem;
+    margin: 0 0 1rem 0;
+}
+
+.milestone-container p {
+    font-size: 2rem;
+    font-family: 'Playfair Display', serif;
+    margin: 0;
+}
+
+/* --- Timer Section --- */
+.timer-boxes {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    width: 650px; 
+}
+
+.time-box {
+    background-color: #fcebeb;
+    border-radius: 10px;
+    padding: 1.5rem;
+    text-align: center;
+    width: 100px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.05);
+    position: relative;
+}
+
+.number {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    font-weight: bold;
+    color: #593c47;
+}
+
+.label {
+    font-size: 1rem;
+    color: #8c5d6e;
+    margin-top: 0.5rem;
+}
+
+.heart {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    font-size: 1.5rem;
+    animation: beat 1.5s infinite;
+    cursor: pointer;
+}
+
+/* --- Reasons Why Section --- */
+.reasons-container {
+    background-color: #fcebeb;
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.05);
+    max-width: 500px;
+    box-sizing: border-box;
+    margin-bottom: 3rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.reasons-container h2 {
+    margin-top: 0;
+}
+
+.reasons-container p {
+    font-size: 1.2rem;
+    min-height: 50px;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.faded-out {
+    opacity: 0;
+}
+
+#new-reason-button {
+    background-color: #8c5d6e;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    font-size: 1rem;
+    font-weight: bold;
+    font-family: 'Lato', sans-serif;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#new-reason-button:hover {
+    background-color: #593c47;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* --- Playlist Section --- */
+.playlist-container {
+    width: 100%;
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* --- Animations & Floating Hearts --- */
+@keyframes beat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+#hearts-container {
+    position: fixed;
+    bottom: 0; left: 0;
+    width: 100%; height: 100vh;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 9999;
+}
+
+.floating-heart {
+    position: absolute;
+    bottom: -10vh;
+    opacity: 0;
+    animation: floatUp 10s ease-in;
+    --heart-size: 20px;
+    width: var(--heart-size);
+    height: var(--heart-size);
+    background-color: #ff79ac;
+    transform: rotate(-45deg);
+}
+
+.floating-heart::before, .floating-heart::after {
+    content: '';
+    position: absolute;
+    width: var(--heart-size);
+    height: var(--heart-size);
+    background-color: #ff79ac;
+    border-radius: 50%;
+}
+
+.floating-heart::before {
+    top: calc(var(--heart-size) / -2);
+    left: 0;
+}
+
+.floating-heart::after {
+    top: 0;
+    left: calc(var(--heart-size) / 2);
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) rotate(-45deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-120vh) rotate(-45deg);
+        opacity: 0;
+    }
+}
+
+/* --- FINAL TIMELINE STYLES --- */
+.timeline {
+    position: relative;
+    width: 900px;
+    margin: 2rem auto;
+    padding: 1rem 0;
+}
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 100%;
+    background-color: #fcebeb;
+}
+.timeline-event {
+    position: relative;
+    width: 50%;
+    margin-bottom: 2rem;
+    box-sizing: border-box;
+}
+.timeline-event:nth-child(odd) {
+    left: 0;
+    padding-right: 2rem; 
+}
+.timeline-event:nth-child(even) {
+    left: 50%;
+    padding-left: 2rem;
+}
+.timeline-event::after {
+    content: '';
+    position: absolute;
+    top: 15px;
+    width: 16px;
+    height: 16px;
+    background-color: white;
+    border: 4px solid #8c5d6e;
+    border-radius: 50%;
+    z-index: 1;
+}
+.timeline-event:nth-child(odd)::after {
+    right: -8px;
+}
+.timeline-event:nth-child(even)::after {
+    left: -8px;
+}
+.timeline-content {
+    padding: 1.5rem;
+    background-color: #fcebeb;
+    border-radius: 10px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.05);
+}
+.timeline-date {
+    font-family: 'Playfair Display', serif;
+    font-weight: bold;
+    color: #8c5d6e;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+.timeline-content p {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
 /* --- Mobile Styles (max-width: 768px) --- */
 @media screen and (max-width: 768px) {
     /* General Styles */
@@ -98,392 +478,4 @@
     #memory-select {
         width: 100%;
     }
-}
-
-/* --- Admin Page Styles --- */
-.admin-container {
-    background-color: #fcebeb;
-    border-radius: 10px;
-    padding: 2.5rem;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.05);
-    max-width: 800px; /* Increased max-width for better spacing */
-    margin: 3rem auto;
-    text-align: center;
-}
-
-.admin-section {
-    padding: 1.5rem;
-    margin-bottom: 2rem;
-    background-color: #fcf8f9;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-}
-
-.admin-section h2 {
-    font-size: 1.5rem;
-    margin-top: 0;
-}
-
-#admin-form-container, #memory-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-}
-
-#admin-form-container input, 
-#memory-form input, 
-#memory-form textarea, 
-#memory-form select {
-    width: 100%;
-    padding: 12px;
-    border-radius: 8px;
-    border: 1px solid #e7d1d6;
-    font-family: 'Lato', sans-serif;
-    font-size: 1rem;
-    box-sizing: border-box;
-}
-
-#admin-form-container button, 
-#memory-form button {
-    background-color: #8c5d6e;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 12px 24px;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    font-size: 1rem;
-    font-weight: bold;
-    font-family: 'Lato', sans-serif;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-#admin-form-container button:hover, 
-#memory-form button:hover {
-    background-color: #593c47;
-    transform: translateY(-2px);
-}
-
-#memory-form textarea {
-    min-height: 150px;
-    resize: vertical;
-}
-
-#memory-form hr {
-    width: 100%;
-    border: 0;
-    height: 1px;
-    background-color: #e7d1d6;
-    margin: 2rem 0;
-}
-
-.button-group {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    width: 100%;
-}
-
-/* --- General & Home Page Styles --- */
-body {
-    /* New: Subtle gradient background */
-    background: linear-gradient(180deg, #fdf5f6 0%, #f9eef1 100%);
-    /* New: A cleaner, more readable font for paragraphs */
-    font-family: 'Lato', sans-serif;
-    margin: 0;
-    color: #593c47; /* Set a base text color */
-}
-
-body.timeline-page {
-    min-width: 950px;
-}
-
-h1, h2, h3 {
-    /* New: An elegant, classic font for all headings */
-    font-family: 'Playfair Display', serif;
-    color: #8c5d6e;
-    text-align: center;
-}
-
-h1 {
-    font-size: 3.5rem;
-    margin: 2rem 0;
-}
-
-nav {
-    width: 100%;
-    text-align: center;
-    padding: 1rem;
-    background-color: #fcebeb;
-    border-bottom: 1px solid #f8e1e5;
-}
-
-nav a {
-    color: #8c5d6e;
-    margin: 0 1rem;
-    text-decoration: none;
-    font-size: 1.2rem;
-    font-weight: bold;
-}
-
-/* --- General Container Styles --- */
-.timer-container, .playlist-container, .milestone-container, .reasons-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 3rem; /* Increased spacing between sections */
-    padding: 0 1rem; /* Add padding for smaller screens */
-}
-
-/* --- Milestone Section (Now Larger) --- */
-.milestone-container {
-    background-color: #fbf6f7;
-    border-radius: 10px;
-    padding: 2.5rem 2rem;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
-    width: 600px; 
-    box-sizing: border-box;
-    border-top: 3px solid #e7d1d6;
-    border-bottom: 3px solid #e7d1d6;
-    margin: 3rem auto;
-}
-
-.milestone-container h2 {
-    font-size: 1.8rem; /* Larger heading */
-    margin: 0 0 1rem 0;
-}
-
-.milestone-container p {
-    font-size: 2rem; /* Larger countdown text */
-    font-family: 'Playfair Display', serif;
-    margin: 0;
-}
-
-
-/* --- Timer Section --- */
-.timer-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 3rem;
-}
-
-.timer-boxes {
-    display: flex;
-    /* Removed flex-wrap: wrap to prevent boxes from stacking */
-    gap: 1rem;
-    justify-content: center;
-    /* Set a fixed width to keep the layout on a single line */
-    width: 650px; 
-}
-
-.time-box {
-    background-color: #fcebeb;
-    border-radius: 10px;
-    padding: 1.5rem;
-    text-align: center;
-    width: 100px;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.05); /* Softer shadow */
-    position: relative;
-}
-
-.number {
-    font-family: 'Playfair Display', serif;
-    font-size: 3.5rem;
-    font-weight: bold;
-    color: #593c47;
-}
-
-.label {
-    font-size: 1rem;
-    color: #8c5d6e;
-    margin-top: 0.5rem;
-}
-
-.heart {
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    font-size: 1.5rem;
-    animation: beat 1.5s infinite;
-    cursor: pointer;
-}
-
-
-/* --- Reasons Why Section --- */
-.reasons-container {
-    background-color: #fcebeb;
-    border-radius: 10px;
-    padding: 2rem;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.05);
-    max-width: 500px;
-    box-sizing: border-box;
-    margin-bottom: 3rem;
-    /* Add these two lines to center the container */
-    margin-left: auto;
-    margin-right: auto;
-}
-.reasons-container h2 {
-    margin-top: 0;
-}
-.reasons-container p {
-    font-size: 1.2rem;
-    min-height: 50px;
-    transition: opacity 0.3s ease-in-out;
-}
-.faded-out {
-    opacity: 0;
-}
-#new-reason-button {
-    background-color: #8c5d6e;
-    color: white;
-    border: none;
-    border-radius: 8px; /* Slightly more rounded */
-    padding: 12px 24px;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    font-size: 1rem;
-    font-weight: bold;
-    font-family: 'Lato', sans-serif;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-#new-reason-button:hover {
-    background-color: #593c47;
-    transform: translateY(-2px); /* Add a 'lift' effect */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-}
-
-
-/* --- Playlist Section --- */
-.playlist-container {
-    width: 100%;
-    max-width: 650px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-
-/* --- Animations & Floating Hearts (No changes here) --- */
-@keyframes beat {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.2); }
-}
-#hearts-container {
-    position: fixed;
-    bottom: 0; left: 0;
-    width: 100%; height: 100vh;
-    pointer-events: none;
-    overflow: hidden;
-    z-index: 9999;
-}
-.floating-heart {
-    position: absolute;
-    bottom: -10vh;
-    opacity: 0;
-    animation: floatUp 10s ease-in;
-    --heart-size: 20px;
-    width: var(--heart-size);
-    height: var(--heart-size);
-    background-color: #ff79ac;
-    transform: rotate(-45deg);
-}
-.floating-heart::before, .floating-heart::after {
-    content: '';
-    position: absolute;
-    width: var(--heart-size);
-    height: var(--heart-size);
-    background-color: #ff79ac;
-    border-radius: 50%;
-}
-.floating-heart::before {
-    top: calc(var(--heart-size) / -2);
-    left: 0;
-}
-.floating-heart::after {
-    top: 0;
-    left: calc(var(--heart-size) / 2);
-}
-@keyframes floatUp {
-    0% {
-        transform: translateY(0) rotate(-45deg);
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(-120vh) rotate(-45deg);
-        opacity: 0;
-    }
-}
-
-
-/* --- FINAL TIMELINE STYLES --- */
-
-.timeline {
-    position: relative;
-    width: 900px;
-    margin: 2rem auto;
-    padding: 1rem 0;
-}
-.timeline::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 4px;
-    height: 100%;
-    background-color: #fcebeb;
-}
-.timeline-event {
-    position: relative;
-    width: 50%;
-    margin-bottom: 2rem;
-    box-sizing: border-box;
-}
-.timeline-event:nth-child(odd) {
-    left: 0;
-    padding-right: 2rem; 
-}
-.timeline-event:nth-child(even) {
-    left: 50%;
-    padding-left: 2rem;
-}
-.timeline-event::after {
-    content: '';
-    position: absolute;
-    top: 15px;
-    width: 16px;
-    height: 16px;
-    background-color: white;
-    border: 4px solid #8c5d6e;
-    border-radius: 50%;
-    z-index: 1;
-}
-.timeline-event:nth-child(odd)::after {
-    right: -8px;
-}
-.timeline-event:nth-child(even)::after {
-    left: -8px;
-}
-.timeline-content {
-    padding: 1.5rem;
-    background-color: #fcebeb;
-    border-radius: 10px;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.05); /* Softer shadow */
-}
-.timeline-date {
-    font-family: 'Playfair Display', serif;
-    font-weight: bold;
-    color: #8c5d6e;
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
-}
-.timeline-content p {
-    margin: 0;
-    font-size: 1rem;
-    line-height: 1.5;
 }
