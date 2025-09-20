@@ -7,6 +7,11 @@
         <meta name="decap-cms-github-client-id" content="Ov23lih8JognBBmKCoPd">
     </head>
     <body>
+        <script>
+            if (window.location.hash.includes("invite_token") || window.location.hash.includes("code=")) {
+            window.location.href = window.location.href.replace(/#.*$/, "");
+            }
+    </script>
         <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
     </body>
 </html>
