@@ -1,17 +1,41 @@
-<!doctype html>
-<html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Content Manager</title>
-        <meta name="decap-cms-github-client-id" content="Ov23lih8JognBBmKCoPd">
-    </head>
-    <body>
-        <script>
-            if (window.location.hash.includes("invite_token") || window.location.hash.includes("code=")) {
-            window.location.href = window.location.href.replace(/#.*$/, "");
-            }
-    </script>
-        <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-    </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Firebase Admin</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <nav>
+        <a href="../index.html">Home</a>
+        <a href="../timeline.html">Our Timeline</a>
+        <a href="index.html">Admin</a>
+    </nav>
+    <h1>Add a New Memory</h1>
+    <div class="reasons-container" id="admin-form-container">
+        <h2>Admin Login</h2>
+        <input type="email" id="email" placeholder="Email">
+        <input type="password" id="password" placeholder="Password">
+        <button id="login-button">Log In</button>
+    </div>
+    <div id="memory-form" style="display:none;">
+        <form>
+            <label for="date-input">Date:</label>
+            <input type="date" id="date-input" required>
+            <br>
+            <label for="title-input">Title:</label>
+            <input type="text" id="title-input" required>
+            <br>
+            <label for="body-input">Memory Text:</label>
+            <textarea id="body-input" required></textarea>
+            <br>
+            <button type="submit" id="save-memory">Save Memory</button>
+        </form>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="admin.js"></script>
+</body>
 </html>
