@@ -232,6 +232,8 @@ nav a {
 .playlist-container {
     width: 100%;
     max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 
