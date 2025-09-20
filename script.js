@@ -127,56 +127,51 @@ window.addEventListener('DOMContentLoaded', () => {
         return { attributes, body };
         }
         async function buildTimeline() {
-            const timelineContainer = document.getElementById('timeline-container');
-            const repoURL = 'https://api.github.com/repos/B-Munkh/Little-Corner/contents/_timeline';
-                try {
-                // 1. Fetch the list of memory files from GitHub
-                const response = await fetch(repoURL);
-                const files = await response.json();
+        const timelineContainer = document.getElementById('timeline-container');
+        const repoURL = 'https://api.github.com/repos/B-Munkh/Little-Corner/contents/_timeline';
 
-                // 2. Fetch the content of each file
-                const memoryPromises = files.map(async (file) => {
-                    const fileResponse = await fetch(file.download_url);
-                    return await fileResponse.text();
-                });
-                const memories = await Promise.all(memoryPromises);
-
-                // 3. Process and sort memories by date
-                const memoriesData = memories.map(mem => {
-                    const content = frontMatter(mem);
-                    content.attributes.date = new Date(content.attributes.date);
-                    return content;
-                }).sort((a, b) => a.attributes.date - b.attributes.date); // Sort oldest to newest
-
-                // 4. Build the HTML for each memory
-                let timelineHTML = '';
-                for (const memory of memoriesData) {
-                    const { date, title, image } = memory.attributes;
-                    const formattedDate = date.toLocaleDateString('en-US', {
-                        year: 'numeric', month: 'long', day: 'numeric'
-                    });
-                    
-                    timelineHTML += `
-                        <div class="timeline-event">
-                            <div class="timeline-content">
-                                ${image ? `<img src="${image}" alt="${title}">` : ''}
-                                <div class="timeline-date">${formattedDate}</div>
-                                <h3>${title}</h3>
-                                <p>${memory.body}</p>
-                            </div>
-                        </div>
-                    `;
-                }
-
-                // 5. Add the generated HTML to the page
-                timelineContainer.innerHTML = timelineHTML;
-
-            } catch (error) {
-                console.error('Error fetching timeline data:', error);
-                timelineContainer.innerHTML = '<p>Could not load memories. Please check the repository name in script.js and ensure the repo is public.</p>';
+        try {
+            const response = await fetch(repoURL);
+            if (!response.ok) {
+                throw new Error(`GitHub API responded with ${response.status}`);
             }
-        }
+            const files = await response.json();
 
-        buildTimeline();
+            const memoriesData = files.map(file => {
+                const decodedContent = atob(file.content); 
+                const content = parseFrontMatter(decodedContent); // Using your new function here
+                content.attributes.date = new Date(content.attributes.date);
+                return content;
+            }).sort((a, b) => a.attributes.date - b.attributes.date);
+
+            let timelineHTML = '';
+            for (const memory of memoriesData) {
+                const { date, title, image, body } = memory.attributes;
+                const formattedDate = date.toLocaleDateString('en-US', {
+                    year: 'numeric', month: 'long', day: 'numeric'
+                });
+                
+                timelineHTML += `
+                    <div class="timeline-event">
+                        <div class="timeline-content">
+                            ${image ? `<img src="${image}" alt="${title || ''}">` : ''}
+                            <div class="timeline-date">${formattedDate}</div>
+                            <h3>${title || ''}</h3>
+                            <p>${body}</p>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            timelineContainer.innerHTML = timelineHTML;
+
+        } catch (error) {
+            console.error('Error fetching timeline data:', error);
+            timelineContainer.innerHTML = '<p>Could not load memories. Please check the repository name in script.js and ensure the repo is public.</p>';
+        }
     }
+
+    // Call the function to build the timeline
+    buildTimeline();
+        }
 });
