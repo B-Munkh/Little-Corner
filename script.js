@@ -1,12 +1,30 @@
+// This file assumes the Firebase SDKs are loaded in the HTML file
+// like so:
+// <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+// <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
+// Add your Firebase project configuration here
+const firebaseConfig = {
+    apiKey: "AIzaSyA8DV-mC-s-Vw9L3GqrK-xicVzvVyhr9tU",
+    authDomain: "little-corner-3c73d.firebaseapp.com",
+    projectId: "little-corner-3c73d",
+    storageBucket: "little-corner-3c73d.appspot.com",
+    messagingSenderId: "763428297149",
+    appId: "1:763428297149:web:08e66d194dd8cc31281ad4",
+    measurementId: "G-QS8NDFH6L5"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
 window.addEventListener('DOMContentLoaded', () => {
 
     // --- HOMEPAGE LOGIC ---
-    // Checks if we are on the homepage by looking for the timer container
     if (document.getElementById('timer-container')) {
-        
+
         // --- Timer Code ---
         function updateTimer() {
-            const startDate = new Date("2025-02-19T00:00:00"); 
+            const startDate = new Date("2025-02-19T00:00:00");
             const now = new Date();
 
             let years = now.getFullYear() - startDate.getFullYear();
@@ -116,76 +134,33 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- TIMELINE PAGE LOGIC ---
-    // Checks if we are on the timeline page
     if (document.getElementById('timeline-container')) {
-        
-        function parseFrontMatter(content) {
-          const match = /^---\n([\s\S]*?)\n---/.exec(content);
-          if (!match) return { attributes: {}, body: content };
-
-          const rawAttrs = match[1];
-          const body = content.slice(match[0].length);
-
-          const attributes = {};
-          rawAttrs.split("\n").forEach(line => {
-            const [key, ...rest] = line.split(":");
-            if (key) attributes[key.trim()] = rest.join(":").trim();
-          });
-
-          return { attributes, body };
-        }
-
-        async function buildTimeline() {
+        function buildTimeline() {
             const timelineContainer = document.getElementById('timeline-container');
-            const repoURL = 'https://api.github.com/repos/B-Munkh/Little-Corner/contents/_timeline';
-
-            try {
-                const response = await fetch(repoURL);
-                if (!response.ok) {
-                    throw new Error(`GitHub API responded with ${response.status}`);
-                }
-                const files = await response.json();
-
-                const memoryFiles = files.filter(file => file.type === 'file' && file.name.endsWith('.md'));
-
-                const memoriesData = memoryFiles.map(file => {
-                    const decodedContent = atob(file.content);
-                    const content = parseFrontMatter(decodedContent);
-                    if (content.attributes.date) {
-                        content.attributes.date = new Date(content.attributes.date);
-                    }
-                    return content;
-                }).sort((a, b) => a.attributes.date - b.attributes.date);
-
-                let timelineHTML = '';
-                for (const memory of memoriesData) {
-                    const { date, title, image, body } = memory.attributes;
-                    if (date) {
-                        const formattedDate = date.toLocaleDateString('en-US', {
-                            year: 'numeric', month: 'long', day: 'numeric'
-                        });
-
-                        timelineHTML += `
-                            <div class="timeline-event">
-                                <div class="timeline-content">
-                                    ${image ? `<img src="${image}" alt="${title || ''}">` : ''}
-                                    <div class="timeline-date">${formattedDate}</div>
-                                    <h3>${title || ''}</h3>
-                                    <p>${body}</p>
-                                </div>
+            timelineContainer.innerHTML = '<p>Loading memories...</p>';
+            db.collection("memories").orderBy("date", "asc").get().then((querySnapshot) => {
+                timelineContainer.innerHTML = ''; // Clear the "Loading" message
+                querySnapshot.forEach((doc) => {
+                    const memory = doc.data();
+                    const date = memory.date.toDate().toLocaleDateString('en-US', {
+                        year: 'numeric', month: 'long', day: 'numeric'
+                    });
+                    const memoryHTML = `
+                        <div class="timeline-event">
+                            <div class="timeline-content">
+                                <div class="timeline-date">${date}</div>
+                                <h3>${memory.title}</h3>
+                                <p>${memory.body}</p>
                             </div>
-                        `;
-                    }
-                }
-                
-                timelineContainer.innerHTML = timelineHTML;
-
-            } catch (error) {
-                console.error('Error fetching timeline data:', error);
-                timelineContainer.innerHTML = '<p>Could not load memories. Please check the repository name in script.js and ensure the repo is public.</p>';
-            }
+                        </div>
+                    `;
+                    timelineContainer.innerHTML += memoryHTML;
+                });
+            }).catch((error) => {
+                console.error("Error getting documents: ", error);
+                timelineContainer.innerHTML = '<p>Could not load memories.</p>';
+            });
         }
-
         buildTimeline();
     }
 });

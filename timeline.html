@@ -18,51 +18,11 @@
 
         <div class="timeline" id="timeline-container">
             <p>Loading memories...</p>
-            </div>
+        </div>
 
         <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
         <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 
-        <script>
-            // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-            const firebaseConfig = {
-                apiKey: "AIzaSyA8DV-mC-s-Vw9L3GqrK-xicVzvVyhr9tU",
-                authDomain: "little-corner-3c73d.firebaseapp.com",
-                projectId: "little-corner-3c73d",
-                storageBucket: "little-corner-3c73d.firebasestorage.app",
-                messagingSenderId: "763428297149",
-                appId: "1:763428297149:web:08e66d194dd8cc31281ad4",
-                measurementId: "G-QS8NDFH6L5"
-            };
-
-            // Initialize Firebase
-            firebase.initializeApp(firebaseConfig);
-            const db = firebase.firestore();
-
-            const timelineContainer = document.getElementById('timeline-container');
-
-            db.collection("memories").orderBy("date", "asc").get().then((querySnapshot) => {
-                timelineContainer.innerHTML = ''; // Clear the "Loading" message
-                querySnapshot.forEach((doc) => {
-                    const memory = doc.data();
-                    const date = memory.date.toDate().toLocaleDateString('en-US', {
-                        year: 'numeric', month: 'long', day: 'numeric'
-                    });
-                    const memoryHTML = `
-                        <div class="timeline-event">
-                            <div class="timeline-content">
-                                <div class="timeline-date">${date}</div>
-                                <h3>${memory.title}</h3>
-                                <p>${memory.body}</p>
-                            </div>
-                        </div>
-                    `;
-                    timelineContainer.innerHTML += memoryHTML;
-                });
-            }).catch((error) => {
-                console.error("Error getting documents: ", error);
-                timelineContainer.innerHTML = '<p>Could not load memories.</p>';
-            });
-        </script>
+        <script src="script.js"></script>
     </body>
 </html>
