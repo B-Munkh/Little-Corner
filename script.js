@@ -35,7 +35,7 @@ window.addEventListener('DOMContentLoaded', () => {
         }
         setInterval(updateTimer, 1000);
         updateTimer();
-        
+
         // --- Milestone Code ---
         function displayNextMilestone() {
             const now = new Date();
@@ -68,6 +68,7 @@ window.addEventListener('DOMContentLoaded', () => {
             });
         }
         displayNextMilestone();
+        setInterval(displayNextMilestone, 1000);
 
         // --- Floating Hearts Code ---
         const container = document.getElementById('hearts-container');
