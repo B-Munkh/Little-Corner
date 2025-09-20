@@ -112,64 +112,73 @@ window.addEventListener('DOMContentLoaded', () => {
     if (document.getElementById('timeline-container')) {
         
         function parseFrontMatter(content) {
-        const match = /^---\n([\s\S]*?)\n---/.exec(content);
-        if (!match) return { attributes: {}, body: content };
+            const match = /^---\n([\s\S]*?)\n---/.exec(content);
+            if (!match) return { attributes: {}, body: content };
 
-        const rawAttrs = match[1];
-        const body = content.slice(match[0].length);
+            const rawAttrs = match[1];
+            const body = content.slice(match[0].length);
 
-        const attributes = {};
-        rawAttrs.split("\n").forEach(line => {
-            const [key, ...rest] = line.split(":");
-            if (key) attributes[key.trim()] = rest.join(":").trim();
-        });
+            const attributes = {};
+            rawAttrs.split("\n").forEach(line => {
+                const [key, ...rest] = line.split(":");
+                if (key) attributes[key.trim()] = rest.join(":").trim();
+            });
 
-        return { attributes, body };
+            return { attributes, body };
         }
         async function buildTimeline() {
-        const timelineContainer = document.getElementById('timeline-container');
-        const repoURL = 'https://api.github.com/repos/B-Munkh/Little-Corner/contents/_timeline';
+            const timelineContainer = document.getElementById('timeline-container');
+            const repoURL = 'https://api.github.com/repos/B-Munkh/Little-Corner/contents/_timeline';
 
-        try {
-            const response = await fetch(repoURL);
-            if (!response.ok) {
-                throw new Error(`GitHub API responded with ${response.status}`);
-            }
-            const files = await response.json();
+            try {
+                const response = await fetch(repoURL);
+                if (!response.ok) {
+                    throw new Error(`GitHub API responded with ${response.status}`);
+                }
+                const files = await response.json();
 
-            const memoriesData = files.map(file => {
-                const decodedContent = atob(file.content); 
-                const content = parseFrontMatter(decodedContent); // Using your new function here
-                content.attributes.date = new Date(content.attributes.date);
-                return content;
-            }).sort((a, b) => a.attributes.date - b.attributes.date);
+                // NEW: Filter the results to only include actual markdown files
+                const memoryFiles = files.filter(file => file.type === 'file' && file.name.endsWith('.md'));
 
-            let timelineHTML = '';
-            for (const memory of memoriesData) {
-                const { date, title, image, body } = memory.attributes;
-                const formattedDate = date.toLocaleDateString('en-US', {
-                    year: 'numeric', month: 'long', day: 'numeric'
-                });
+                // Use the filtered array to process memories
+                const memoriesData = memoryFiles.map(file => {
+                    const decodedContent = atob(file.content);
+                    const content = parseFrontMatter(decodedContent);
+                    if (content.attributes.date) { // Check if date exists before creating
+                        content.attributes.date = new Date(content.attributes.date);
+                    }
+                    return content;
+                }).sort((a, b) => a.attributes.date - b.attributes.date);
+
+                let timelineHTML = '';
+                for (const memory of memoriesData) {
+                    const { date, title, image, body } = memory.attributes;
+                    // Only display if there's a valid date
+                    if (date) {
+                        const formattedDate = date.toLocaleDateString('en-US', {
+                            year: 'numeric', month: 'long', day: 'numeric'
+                        });
+
+                        timelineHTML += `
+                            <div class="timeline-event">
+                                <div class="timeline-content">
+                                    ${image ? `<img src="${image}" alt="${title || ''}">` : ''}
+                                    <div class="timeline-date">${formattedDate}</div>
+                                    <h3>${title || ''}</h3>
+                                    <p>${body}</p>
+                                </div>
+                            </div>
+                        `;
+                    }
+                }
                 
-                timelineHTML += `
-                    <div class="timeline-event">
-                        <div class="timeline-content">
-                            ${image ? `<img src="${image}" alt="${title || ''}">` : ''}
-                            <div class="timeline-date">${formattedDate}</div>
-                            <h3>${title || ''}</h3>
-                            <p>${body}</p>
-                        </div>
-                    </div>
-                `;
-            }
-            
-            timelineContainer.innerHTML = timelineHTML;
+                timelineContainer.innerHTML = timelineHTML;
 
-        } catch (error) {
-            console.error('Error fetching timeline data:', error);
-            timelineContainer.innerHTML = '<p>Could not load memories. Please check the repository name in script.js and ensure the repo is public.</p>';
+            } catch (error) {
+                console.error('Error fetching timeline data:', error);
+                timelineContainer.innerHTML = '<p>Could not load memories. Please check the repository name in script.js and ensure the repo is public.</p>';
+            }
         }
-    }
 
     // Call the function to build the timeline
     buildTimeline();
