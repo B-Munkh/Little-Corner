@@ -14,7 +14,7 @@ collections:
     create: true # Allow your girlfriend to create new timeline events
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # How to automatically name new files
     fields: # The form fields she will see when editing
-      - { label: "Event Date", name: "date", widget: "datetime" }
+      - { label: "Event Date", name: "date", widget: "datetime", optional: true, time_format: false }
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Memory Text", name: "body", widget: "markdown" }
       - { label: "Photo", name: "image", widget: "image", optional: true }
