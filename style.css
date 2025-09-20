@@ -476,7 +476,7 @@ nav a {
     
     /* Admin Section */
     .admin-container {
-        width: 90%;
+        width: auto;
         padding: 1rem;
     }
     .admin-section {
