@@ -17,4 +17,4 @@ collections:
       - { label: "Event Date", name: "date", widget: "datetime", optional: true, time_format: false }
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Memory Text", name: "body", widget: "markdown" }
-      - { label: "Photo", name: "image", widget: "image", optional: true }
+      - { label: "Photo", name: "image", widget: "image", required: false}
