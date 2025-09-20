@@ -1,7 +1,7 @@
 window.addEventListener('DOMContentLoaded', () => {
 
     // --- HOMEPAGE LOGIC ---
-    // Checks if we are on the homepage by looking for the timer container
+    // This block only runs if it finds the 'timer-container' on the page
     if (document.getElementById('timer-container')) {
         
         // --- Timer Code ---
@@ -52,12 +52,13 @@ window.addEventListener('DOMContentLoaded', () => {
                     soonestMilestoneName = milestone.name;
                 }
             }
+            const messageElement = document.getElementById("milestone-text");
             if (soonestMilestoneDate) {
                 const distance = soonestMilestoneDate - now;
                 const days = Math.ceil(distance / (1000 * 60 * 60 * 24));
-                document.getElementById("milestone-text").textContent = `${days} days until ${soonestMilestoneName}`;
+                messageElement.textContent = `${days} days until ${soonestMilestoneName}`;
             } else {
-                document.getElementById("milestone-text").textContent = "No upcoming milestones!";
+                messageElement.textContent = "No upcoming milestones!";
             }
         }
         displayNextMilestone();
@@ -78,7 +79,9 @@ window.addEventListener('DOMContentLoaded', () => {
             container.appendChild(heart);
             heart.addEventListener('animationend', () => { heart.remove(); });
         }
-        triggerHeart.addEventListener('click', triggerHeartsAnimation);
+        if (triggerHeart) {
+            triggerHeart.addEventListener('click', triggerHeartsAnimation);
+        }
 
         // --- "Reasons Why" Code ---
         const reasons = [
@@ -93,41 +96,42 @@ window.addEventListener('DOMContentLoaded', () => {
         const reasonText = document.getElementById("reason-text");
         const newReasonButton = document.getElementById("new-reason-button");
         let lastReasonIndex = -1;
-        newReasonButton.addEventListener('click', () => {
-            reasonText.classList.add('faded-out');
-            setTimeout(() => {
-                let newIndex;
-                do {
-                    newIndex = Math.floor(Math.random() * reasons.length);
-                } while (reasons.length > 1 && newIndex === lastReasonIndex);
-                lastReasonIndex = newIndex;
-                reasonText.textContent = reasons[newIndex];
-                reasonText.classList.remove('faded-out');
-            }, 300);
-        });
+        if (newReasonButton) {
+            newReasonButton.addEventListener('click', () => {
+                reasonText.classList.add('faded-out');
+                setTimeout(() => {
+                    let newIndex;
+                    do {
+                        newIndex = Math.floor(Math.random() * reasons.length);
+                    } while (reasons.length > 1 && newIndex === lastReasonIndex);
+                    lastReasonIndex = newIndex;
+                    reasonText.textContent = reasons[newIndex];
+                    reasonText.classList.remove('faded-out');
+                }, 300);
+            });
+        }
     }
 
     // --- TIMELINE PAGE LOGIC ---
+    // This block only runs if it finds the 'timeline-container' on the page
     if (document.getElementById('timeline-container')) {
         
         function parseFrontMatter(content) {
           const match = /^---\n([\s\S]*?)\n---/.exec(content);
           if (!match) return { attributes: {}, body: content };
-
           const rawAttrs = match[1];
           const body = content.slice(match[0].length);
-
           const attributes = {};
           rawAttrs.split("\n").forEach(line => {
             const [key, ...rest] = line.split(":");
             if (key) attributes[key.trim()] = rest.join(":").trim();
           });
-
           return { attributes, body };
         }
 
         async function buildTimeline() {
             const timelineContainer = document.getElementById('timeline-container');
+            // 🚨 IMPORTANT: Replace this with your GitHub username and repository name
             const repoURL = 'https://api.github.com/repos/B-Munkh/Little-Corner/contents/_timeline';
 
             try {
@@ -136,9 +140,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     throw new Error(`GitHub API responded with ${response.status}`);
                 }
                 const files = await response.json();
-
                 const memoryFiles = files.filter(file => file.type === 'file' && file.name.endsWith('.md'));
-
                 const memoriesData = memoryFiles.map(file => {
                     const decodedContent = atob(file.content);
                     const content = parseFrontMatter(decodedContent);
@@ -146,7 +148,10 @@ window.addEventListener('DOMContentLoaded', () => {
                         content.attributes.date = new Date(content.attributes.date);
                     }
                     return content;
-                }).sort((a, b) => a.attributes.date - b.attributes.date);
+                }).sort((a, b) => {
+                    if (!a.attributes.date || !b.attributes.date) return 0;
+                    return a.attributes.date - b.attributes.date;
+                });
 
                 let timelineHTML = '';
                 for (const memory of memoriesData) {
@@ -155,7 +160,6 @@ window.addEventListener('DOMContentLoaded', () => {
                         const formattedDate = date.toLocaleDateString('en-US', {
                             year: 'numeric', month: 'long', day: 'numeric'
                         });
-
                         timelineHTML += `
                             <div class="timeline-event">
                                 <div class="timeline-content">
@@ -168,15 +172,12 @@ window.addEventListener('DOMContentLoaded', () => {
                         `;
                     }
                 }
-                
                 timelineContainer.innerHTML = timelineHTML;
-
             } catch (error) {
                 console.error('Error fetching timeline data:', error);
                 timelineContainer.innerHTML = '<p>Could not load memories. Please check the repository name in script.js and ensure the repo is public.</p>';
             }
         }
-
         buildTimeline();
     }
 });
