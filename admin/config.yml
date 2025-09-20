@@ -1,21 +1,21 @@
-# Step 1: Configure the backend (your GitHub repo)
+# Use GitHub as the backend for authentication
 backend:
-  name: git-gateway
+  name: github
+  repo: B-Munkh/Little-Corner
   branch: main
 
-# Step 2: Configure where media (images) will be stored
-media_folder: "images/uploads" # The folder where images will be saved in your repo
-public_folder: "/images/uploads" # The path the website will use to access the images
+# Media and Collections sections remain the same
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
 
-# Step 3: Define your editable content types (Collections)
 collections:
-  - name: "timeline" # The name for the collection of timeline events
-    label: "Timeline" # How it will appear in the CMS interface
-    folder: "_timeline" # The folder where new memories will be saved as files
-    create: true 
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}" 
-    fields: 
+  - name: "timeline"
+    label: "Timeline"
+    folder: "_timeline"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
       - { label: "Event Date", name: "date", widget: "datetime", optional: true, time_format: false }
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Memory Text", name: "body", widget: "markdown" }
-      - { label: "Photo", name: "image", widget: "image", required: false}
+      - { label: "Photo", name: "image", widget: "image", required: false }
