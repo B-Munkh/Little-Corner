@@ -108,24 +108,24 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- TIMELINE PAGE LOGIC ---
-    // Checks if we are on the timeline page
     if (document.getElementById('timeline-container')) {
         
         function parseFrontMatter(content) {
-            const match = /^---\n([\s\S]*?)\n---/.exec(content);
-            if (!match) return { attributes: {}, body: content };
+          const match = /^---\n([\s\S]*?)\n---/.exec(content);
+          if (!match) return { attributes: {}, body: content };
 
-            const rawAttrs = match[1];
-            const body = content.slice(match[0].length);
+          const rawAttrs = match[1];
+          const body = content.slice(match[0].length);
 
-            const attributes = {};
-            rawAttrs.split("\n").forEach(line => {
-                const [key, ...rest] = line.split(":");
-                if (key) attributes[key.trim()] = rest.join(":").trim();
-            });
+          const attributes = {};
+          rawAttrs.split("\n").forEach(line => {
+            const [key, ...rest] = line.split(":");
+            if (key) attributes[key.trim()] = rest.join(":").trim();
+          });
 
-            return { attributes, body };
+          return { attributes, body };
         }
+
         async function buildTimeline() {
             const timelineContainer = document.getElementById('timeline-container');
             const repoURL = 'https://api.github.com/repos/B-Munkh/Little-Corner/contents/_timeline';
@@ -137,14 +137,12 @@ window.addEventListener('DOMContentLoaded', () => {
                 }
                 const files = await response.json();
 
-                // NEW: Filter the results to only include actual markdown files
                 const memoryFiles = files.filter(file => file.type === 'file' && file.name.endsWith('.md'));
 
-                // Use the filtered array to process memories
                 const memoriesData = memoryFiles.map(file => {
                     const decodedContent = atob(file.content);
                     const content = parseFrontMatter(decodedContent);
-                    if (content.attributes.date) { // Check if date exists before creating
+                    if (content.attributes.date) {
                         content.attributes.date = new Date(content.attributes.date);
                     }
                     return content;
@@ -153,7 +151,6 @@ window.addEventListener('DOMContentLoaded', () => {
                 let timelineHTML = '';
                 for (const memory of memoriesData) {
                     const { date, title, image, body } = memory.attributes;
-                    // Only display if there's a valid date
                     if (date) {
                         const formattedDate = date.toLocaleDateString('en-US', {
                             year: 'numeric', month: 'long', day: 'numeric'
@@ -180,7 +177,6 @@ window.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-    // Call the function to build the timeline
-    buildTimeline();
-        }
+        buildTimeline();
+    }
 });
