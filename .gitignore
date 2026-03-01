@@ -1,0 +1,19 @@
+# React frontend
+little-corner-react/node_modules/
+little-corner-react/build/
+
+# API backend
+little-corner-api/node_modules/
+little-corner-api/dist/
+
+# Logs
+*.log
+
+# OS/IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Env files
+*.env
