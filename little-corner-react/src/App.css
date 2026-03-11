@@ -46,6 +46,7 @@ nav a {
     display: flex;
     gap: 1rem;
     justify-content: center;
+    align-items: flex-start;
     width: 650px;
     position: relative;
 }
@@ -73,14 +74,26 @@ nav a {
     margin-top: 0.5rem;
 }
 
-/* Heart Button */
-.heart {
+/* Heart Button (sits beside timer boxes) */
+.heart-button {
+    appearance: none;
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    line-height: 1;
+    font-size: 1.6rem;
+    cursor: pointer;
     position: absolute;
     top: -10px;
     right: -10px;
-    font-size: 1.5rem;
-    cursor: pointer;
     animation: beat 1.5s infinite;
+}
+
+.heart-button:focus-visible {
+    outline: 3px solid rgba(140, 93, 110, 0.35);
+    outline-offset: 6px;
+    border-radius: 12px;
 }
 
 /* Floating Hearts */
@@ -96,8 +109,8 @@ nav a {
 
 .floating-heart {
     position: absolute;
-    width: 20px;
-    height: 20px;
+    width: var(--heart-size, 20px);
+    height: var(--heart-size, 20px);
     background-color: #ff79ac;
     transform: rotate(-45deg);
     animation: floatUp 10s ease-in forwards;
@@ -107,18 +120,18 @@ nav a {
 .floating-heart::after {
     content: '';
     position: absolute;
-    width: 20px;
-    height: 20px;
+    width: var(--heart-size, 20px);
+    height: var(--heart-size, 20px);
     background-color: #ff79ac;
     border-radius: 50%;
 }
 
-.floating-heart::before { top: -10px; left: 0; }
-.floating-heart::after { top: 0; left: 10px; }
+.floating-heart::before { top: calc(var(--heart-size, 20px) * -0.5); left: 0; }
+.floating-heart::after { top: 0; left: calc(var(--heart-size, 20px) * 0.5); }
 
 @keyframes floatUp {
-    0% { transform: translateY(0) rotate(-45deg); opacity: 1; }
-    100% { transform: translateY(-100vh) rotate(-45deg); opacity: 0; }
+    0% { transform: translate(0, 0) rotate(-45deg); opacity: 1; }
+    100% { transform: translate(var(--drift, 0px), -110vh) rotate(-45deg); opacity: 0; }
 }
 
 @keyframes beat {
@@ -319,6 +332,13 @@ nav a {
     color: #8c5d6e;
     font-size: 1.1rem;
     margin-bottom: 0.5rem;
+}
+
+.timeline-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    margin: 0 0 0.5rem 0;
+    color: #8c5d6e;
 }
 
 .timeline-content p { margin: 0; font-size: 1rem; line-height: 1.5; }

@@ -50,6 +50,7 @@ export default function Timer() {
   // Generate multiple hearts starting from the bottom of the page
   const createHearts = () => {
     const heartsContainer = document.getElementById("hearts-container");
+    if (!heartsContainer) return;
     const numHearts = 30; // number of hearts per click
 
     for (let i = 0; i < numHearts; i++) {
@@ -58,6 +59,8 @@ export default function Timer() {
 
       // Random horizontal position across the viewport
       heart.style.left = `${Math.random() * 100}vw`;
+      // Always start from the bottom of the viewport
+      heart.style.bottom = `${-20 - Math.random() * 60}px`;
 
       // Random size and animation duration
       const size = 15 + Math.random() * 25; // 15px - 40px
@@ -66,6 +69,7 @@ export default function Timer() {
       heart.style.setProperty("--heart-size", `${size}px`);
       const duration = 5 + Math.random() * 5; // 5-10 seconds
       heart.style.animationDuration = `${duration}s`;
+      heart.style.setProperty("--drift", `${(Math.random() * 2 - 1) * 60}px`);
 
       heartsContainer.appendChild(heart);
 
@@ -78,37 +82,30 @@ export default function Timer() {
 
   return (
     <div className="timer-container">
-      <div className="timer-boxes" style={{ position: "relative" }}>
+      <h1>Time Together</h1>
+      <div className="timer-boxes">
         {Object.entries(time).map(([label, value]) => (
           <div className="time-box" key={label}>
             <div className="number">{value}</div>
-            <div className="label">{label.charAt(0).toUpperCase() + label.slice(1)}</div>
+            <div className="label">
+              {label.charAt(0).toUpperCase() + label.slice(1)}
+            </div>
+            {label === "seconds" && (
+              <button
+                className="heart-button"
+                type="button"
+                onClick={createHearts}
+                aria-label="Send hearts"
+              >
+                ❤️
+              </button>
+            )}
           </div>
         ))}
-        {/* Heart button stays inside timer-box */}
-        <div
-          className="heart"
-          onClick={createHearts}
-          style={{ top: "10px", right: "10px" }}
-        >
-          ❤️
-        </div>
       </div>
 
       {/* Full-page hearts container */}
-      <div
-        id="hearts-container"
-        style={{
-          position: "fixed",
-          bottom: 0,
-          left: 0,
-          width: "100%",
-          height: "100vh",
-          pointerEvents: "none",
-          overflow: "hidden",
-          zIndex: 9999,
-        }}
-      ></div>
+      <div id="hearts-container"></div>
     </div>
   );
 }

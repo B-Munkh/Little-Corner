@@ -25,7 +25,9 @@ export default function Reasons() {
     <div className="reasons-container">
       <h2>A Few Reasons Why...</h2>
       <p>{index === -1 ? "Click the button to see a reason!" : reasons[index]}</p>
-      <button onClick={newReason}>New Reason</button>
+      <button id="new-reason-button" onClick={newReason}>
+        New Reason
+      </button>
     </div>
   );
 }
